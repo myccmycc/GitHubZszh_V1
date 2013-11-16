@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="true" click="itemrenderer1_clickHandler(event)" mouseDown="itemrenderer1_mouseDownHandler(event)" dataChange="itemrenderer1_dataChangeHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.core.DragSource;
+			import mx.core.UIComponent;
+			import mx.events.FlexEvent;
+			import mx.events.ItemClickEvent;
+			import mx.managers.DragManager;
+			
+			import spark.components.Image;
+			
+			import zszh_WorkSpace2D.WorkSpace2D;
+			protected function itemrenderer1_clickHandler(event:MouseEvent):void
+			{
+				var e:ItemClickEvent = new ItemClickEvent(ItemClickEvent.ITEM_CLICK, true);
+				e.item = data;
+				e.index = itemIndex;
+				dispatchEvent(e);
+			}
+			
+			protected function itemrenderer1_mouseDownHandler(event:MouseEvent):void
+			{
+				var dragInitiator:UIComponent=UIComponent(event.currentTarget);			
+				
+				
+				var ds:DragSource = new DragSource();
+				ds.addData(dragInitiator, "dragInitiator");//D&D拖拽源
+				
+				ds.addData(data.className, "className");//传递的数据
+				ds.addData(data.classArgument,"classArgument");
+				ds.addData(data.resourcePath, "resourcePath");//传递的数据
+				ds.addData(data.objectName, "objectName");//传递的数据
+				
+				var dragProxy:Image=new Image();
+				
+				if(data.className=="model")
+				{
+					var loader:Loader=new Loader;
+					loader.load(new URLRequest(data.resourcePath+"top.png"));
+					loader.contentLoaderInfo.addEventListener(Event.COMPLETE, OnComplete);
+				}
+				else if(data.className=="Room_2D"||data.className=="Wall_2D")
+				{
+					dragProxy.source=img.source;
+					dragProxy.width=120;
+					dragProxy.height=120;
+					
+					DragManager.doDrag(dragInitiator, ds,event,dragProxy,0,0);
+				}
+				else if(data.className=="diban")
+				{
+					dragProxy.source=img.source;
+					dragProxy.width=120;
+					dragProxy.height=120;
+					//CursorManager.setCursor(FlexGlobals.topLevelApplication.imageCursor_Wall,2);
+					DragManager.doDrag(dragInitiator, ds,event,dragProxy,0,0);
+				}
+				
+				else if(data.className=="rujiaoqi")
+				{
+					dragProxy.source=img.source;
+					dragProxy.width=120;
+					dragProxy.height=120;
+					DragManager.doDrag(dragInitiator, ds,event,dragProxy,0,0);
+				}
+				
+				else if(data.className=="modelOnWall")
+				{
+					dragProxy.source=img.source;
+					dragProxy.width=120;
+					dragProxy.height=120;
+					DragManager.doDrag(dragInitiator, ds,event,dragProxy,0,0);
+				}
+				
+				else if(data.className=="window")
+				{
+					//need fixed
+				  
+					dragProxy.graphics.clear();
+					
+					dragProxy.graphics.lineStyle(2,0xffffff,0.6);
+					dragProxy.graphics.moveTo(100,0);
+					dragProxy.graphics.curveTo(100,100,0,100);
+					
+					dragProxy.graphics.lineStyle(5,0xffffff);
+					dragProxy.graphics.moveTo(5,0)
+					dragProxy.graphics.lineTo(105,0);
+					
+					dragProxy.graphics.lineStyle(0,0xffffff);
+					dragProxy.graphics.beginFill(0xffffff);
+					dragProxy.graphics.drawRect(0,-3,15,100);
+					dragProxy.graphics.endFill();
+					//dragProxy.source=img.source;
+					//dragProxy.width=120;
+					//dragProxy.height=120;
+					DragManager.doDrag(dragInitiator, ds,event,dragProxy,0,0,1);
+				}
+				
+				else if(data.className=="door")
+				{
+					//need fixed
+					
+					dragProxy.graphics.clear();
+					
+					dragProxy.graphics.lineStyle(2,0xffffff,0.6);
+					dragProxy.graphics.moveTo(100,0);
+					dragProxy.graphics.curveTo(100,100,0,100);
+					
+					dragProxy.graphics.lineStyle(5,0xffffff);
+					dragProxy.graphics.moveTo(5,0)
+					dragProxy.graphics.lineTo(105,0);
+					
+					dragProxy.graphics.lineStyle(0,0xffffff);
+					dragProxy.graphics.beginFill(0xffffff);
+					dragProxy.graphics.drawRect(0,-3,15,100);
+					dragProxy.graphics.endFill();
+					//dragProxy.source=img.source;
+					//dragProxy.width=120;
+					//dragProxy.height=120;
+					DragManager.doDrag(dragInitiator, ds,event,dragProxy,0,0,1);
+				}
+				
+				function OnComplete(e:Event):void
+				{
+					dragProxy.source=loader.content;
+					var work2d:WorkSpace2D=parentApplication.GetWorkSpace2D();
+					
+					var w:int=loader.content.width*work2d.GetGrid().scaleX;
+					var h:int=loader.content.height*work2d.GetGrid().scaleY;
+					dragProxy.width=w;
+					dragProxy.height=h;
+					var dw:int=-w/2;
+					var dh:int=-h/2;
+					DragManager.doDrag(dragInitiator, ds,event,dragProxy);
+				}	
+				event.stopPropagation();
+			}
+		
+			
+			protected function itemrenderer1_dataChangeHandler(event:FlexEvent):void
+			{
+				if(!img)
+					return;
+				if(data.imgThumbnail=="preview.png" || data.imgThumbnail=="preview.jpg")
+					img.source=data.resourcePath+data.imgThumbnail;
+				else img.source = data.imgThumbnail;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:SkinnableContainer backgroundColor="0x404040" >
+		<s:layout>
+			<s:VerticalLayout />
+		</s:layout>
+		<s:SkinnableContainer width="120" height="120" backgroundColor="0xff0000" >
+			<s:Image id="img"  width="120" height="120" backgroundColor="0x404040" verticalCenter="0" horizontalCenter="0" />
+		</s:SkinnableContainer>
+		<!--s:Label text="{data.labelText}" width="90" textAlign="center" /-->
+	</s:SkinnableContainer>
+	
+</s:ItemRenderer>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					  xmlns:s="library://ns.adobe.com/flex/spark" 
+					  xmlns:mx="library://ns.adobe.com/flex/mx" width="775" height="510" initialize="initializeHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
+			import mx.rpc.events.ResultEvent;
+			import mx.rpc.http.HTTPService;
+			import mx.utils.URLUtil;
+			
+			import spark.components.Image;
+			
+			import away3d.arcane;
+			
+			import zszh_WorkSpace2D.WorkSpace2D;
+			
+			[Embed(source="embeds/PopupWindow/B1.png")]
+			[Bindable] 
+			public var icon_B1:Class;
+			
+			[Bindable]
+			[Embed(source="embeds/sample.png")]
+			public var icon_sample:Class;
+			
+			
+			private function StartApp():void {
+				PopUpManager.removePopUp(this);
+			}
+			
+			protected function initializeHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+				var url:String=this.parentApplication.url;
+				var pos:int=mx.utils.URLUtil.getFullURL(url,url).lastIndexOf('/');
+				var serverUrl:String=mx.utils.URLUtil.getFullURL(url,url).substr(0,pos);
+
+				var httpPost:HTTPService=new HTTPService;
+				httpPost.url= serverUrl+"/services/GetHouseFiles.php";
+				Alert.show(httpPost.url);
+				httpPost.method="POST";
+				httpPost.useProxy=false;
+				httpPost.addEventListener(ResultEvent.RESULT,OnResult);
+				httpPost.send();
+				
+				function OnResult(evt:ResultEvent):void
+				{
+					//Alert.show(String(evt.result));
+					if(!evt.result.data)
+						return;
+					var array:ArrayCollection=evt.result.data.filename;
+			 		for(var i:int=0;i<array.length;i++)
+					{
+						var image:Image=new Image();
+						image.source=icon_sample;
+						image.x=(i%4)*160;
+						image.y=(int(i/4))*144;
+						image.width=160;
+						image.height=144;
+						image.name=array[i];
+						image.addEventListener(MouseEvent.CLICK,OnImageClick);
+						PaperFileContainer.addElement(image);
+					}
+					 
+				}
+				
+			}
+			
+			private function OnImageClick(e:MouseEvent):void
+			{
+				var fileName:String=e.currentTarget.name;
+				
+				var _work2D:WorkSpace2D=parentApplication.GetWorkSpace2D();
+				_work2D.LoadFromXML(fileName);
+				
+				PopUpManager.removePopUp(this);
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	 
+	<fx:Style>
+		
+		.WelcomeTabs {
+			
+			tabWidth:165;
+			tabHeight:33;
+			fontFamily:微软雅黑;
+			
+			paddingTop:0;
+			
+			paddingLeft:0;
+			
+			horizontalGap:3;
+			
+			fontSize:16;
+			
+			text-color:#34495e;
+			
+			text-roll-over-color:#ffffff;
+				
+			fontWeight:normal;
+			
+			up-skin:ClassReference("zszh_welcome.Skin_WelcomeTab");
+			
+			down-skin:ClassReference("zszh_welcome.Skin_WelcomeTab");
+			
+			over-skin:ClassReference("zszh_welcome.Skin_WelcomeTab");
+			
+			disabled-skin:ClassReference("zszh_welcome.Skin_WelcomeTab");
+			
+			selected-up-skin:ClassReference("zszh_welcome.Skin_WelcomeTabSelected");
+			
+			selected-down-skin:ClassReference("zszh_welcome.Skin_WelcomeTabSelected");
+			
+			selected-over-skin:ClassReference("zszh_welcome.Skin_WelcomeTabSelected");
+			
+			selected-disabled-skin:ClassReference("zszh_welcome.Skin_WelcomeTabSelected");
+			
+			
+		}
+		
+		.selectedTab {  
+			font-size:11;  
+			font-weight:normal;  
+			color:#00ff00;  
+		}  
+	</fx:Style>
+	<mx:TabNavigator width="100%" height="100%" tabStyleName="WelcomeTabs" backgroundColor="0x2980d7" >
+		
+		<s:NavigatorContent label="我的文档" width="100%" height="100%" backgroundColor="0xffffff" >
+			
+			<s:Button label="Start" skinClass="zszh_welcome.Skin_BtStart" width="215" height="75" horizontalCenter="0" bottom="15" click="StartApp()" />
+			<s:SkinnableContainer id="PaperFileContainer"  width="100%" height="290" bottom="100" skinClass="zszh_welcome.Skin_WelcomeCenter" >
+				<!--s:Image source="{icon_sample}" width="160" height="144"/-->
+			</s:SkinnableContainer>
+		</s:NavigatorContent>
+		
+		
+	</mx:TabNavigator>
+	
+</s:SkinnableContainer>

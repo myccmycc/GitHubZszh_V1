@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<s:SparkSkin name="Skin_AccordionHead"
+			 xmlns:fx="http://ns.adobe.com/mxml/2009"
+			 xmlns:s="library://ns.adobe.com/flex/spark"
+			 minWidth="21" minHeight="21"
+			 alpha.disabled="0.5">
+	<!-- states -->
+	<s:states>
+		<s:State name="up" />
+		<s:State name="over" />
+		<s:State name="down" />
+		<s:State name="disabled" />
+		<s:State name="selectedUp" />
+		<s:State name="selectedOver" />
+		<s:State name="selectedDown" />
+		<s:State name="selectedDisabled" />
+	</s:states>
+	
+	<!-- layer 3: fill -->
+	<s:Rect left="0" right="0" top="1" bottom="1" width="310" height="40">
+		<s:fill>
+			<s:SolidColor color="#34495e"
+						  color.up="#34495e"
+						  color.over="#2c3e50"
+						  color.down="#34495e"
+						  color.selectedUp="#2c3e50"
+						  color.selectedOver="#2c3e50"
+						  color.selectedDown="#2c3e50" />
+		</s:fill>
+	</s:Rect>
+
+	
+	<!-- layer 6: highlight stroke bottom and top -->
+	<s:Rect right="0" left="0" top="0"  height="1">
+		<s:fill>
+			<s:SolidColor color="0x273746" />
+		</s:fill>
+	</s:Rect>
+	<s:Rect right="0" left="0" bottom="0" height="1">
+		<s:fill>
+			<s:SolidColor color="0x273746"  />
+		</s:fill>
+	</s:Rect>
+	
+	
+</s:SparkSkin>

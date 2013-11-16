@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					  xmlns:s="library://ns.adobe.com/flex/spark" 
+					  xmlns:mx="library://ns.adobe.com/flex/mx" width="400" height="300" initialize="skinnablecontainer_initializeHandler(event)" enterFrame="skinnablecontainer_enterFrameHandler(event)">
+	
+	<fx:Metadata>
+		[Event(name="DeleteWall", type="flash.events.Event")]
+		[Event(name="SplitWall", type="flash.events.Event")]
+		[Event(name="HoleWall", type="flash.events.Event")]
+		
+	</fx:Metadata>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.core.UIComponent;
+			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
+			
+			public static const DELETE_WALL:String="DeleteWall";
+			public static const SPLIT_WALL:String="SplitWall";
+			public static const HOLE_WALL:String="HoleWall";
+			
+			private function ShowScale():void {
+			}
+			
+			private function DeleteWall():void {
+				this.dispatchEvent(new Event(DELETE_WALL));
+				CloseMe();
+			}
+			
+			private function SplitWall():void {
+				this.dispatchEvent(new Event(SPLIT_WALL));
+				CloseMe();
+			}
+			
+			private function HoleWall():void {
+				this.dispatchEvent(new Event(HOLE_WALL));
+				CloseMe();
+			}
+			
+			private function CloseMe():void
+			{
+				PopUpManager.removePopUp(this);
+			}
+			private var sp:Sprite;
+			private var backComponent:UIComponent;
+			private var _Start:Boolean=false;
+			protected function skinnablecontainer_initializeHandler(event:FlexEvent):void
+			{
+				
+				sp=new Sprite;
+				backComponent=new UIComponent;
+				backComponent.addChild(sp);
+				addElement(backComponent);
+				setElementIndex(backComponent,0);
+				
+				myButton1Out.play();
+				myButton2Out.play();
+				myButton3Out.play();
+				myButton4Out.play();
+				myButton5Out.play();
+				_Start=true;
+				
+			}
+			
+			protected function skinnablecontainer_enterFrameHandler(event:Event):void
+			{
+				if(!_Start)
+					return;
+				sp.graphics.clear();
+				
+				sp.graphics.beginFill(0xffffff,1);
+				sp.graphics.drawCircle(0,0,4);
+				sp.graphics.endFill();
+				
+				sp.graphics.lineStyle(1,0xffffff);//白线
+				
+				sp.graphics.moveTo(0,0);
+				sp.graphics.lineTo(myButton1.x+myButton1.width/2,myButton1.y+myButton1.height/2);
+				
+				sp.graphics.moveTo(0,0);
+				sp.graphics.lineTo(myButton2.x+myButton2.width/2,myButton2.y+myButton2.height/2);
+				
+				sp.graphics.moveTo(0,0);
+				sp.graphics.lineTo(myButton3.x+myButton3.width/2,myButton3.y+myButton3.height/2);
+				
+				sp.graphics.moveTo(0,0);
+				sp.graphics.lineTo(myButton4.x+myButton4.width/2,myButton4.y+myButton4.height/2);
+				
+				sp.graphics.moveTo(0,0);
+				sp.graphics.lineTo(myButton5.x+myButton5.width/2,myButton5.y+myButton5.height/2);
+				
+				sp.graphics.endFill();
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<s:Move id="myButton1Out" target="{myButton1}" xFrom="0" yFrom="0"  xTo="{myButton1.x}" yTo="{myButton1.y}"/>
+		<s:Move id="myButton2Out" target="{myButton2}" xFrom="0" yFrom="0"  xTo="{myButton2.x}" yTo="{myButton2.y}"/>
+		<s:Move id="myButton3Out" target="{myButton3}" xFrom="0" yFrom="0"  xTo="{myButton3.x}" yTo="{myButton3.y}"/>
+		<s:Move id="myButton4Out" target="{myButton4}" xFrom="0" yFrom="0"  xTo="{myButton4.x}" yTo="{myButton4.y}"/>
+		<s:Move id="myButton5Out" target="{myButton5}" xFrom="0" yFrom="0"  xTo="{myButton5.x}" yTo="{myButton5.y}"/>
+		
+	</fx:Declarations>
+	<s:Button id="myButton1" x="-100" y="-50"  label="拆除" width="80" height="25" click="DeleteWall()" skinClass="zszh_WorkSpace2D.Skin_PopupMenuBt" />
+	
+	<s:Button id="myButton2" x="-120" y="-10"  label="拆分墙" width="80" height="25" click="SplitWall()" skinClass="zszh_WorkSpace2D.Skin_PopupMenuBt"/>
+	
+	<s:Button id="myButton3" x="20" y="-50"  label="墙去段" width="80" height="25" click="HoleWall()" skinClass="zszh_WorkSpace2D.Skin_PopupMenuBt"/>
+	
+	<s:Button id="myButton4" x="40" y="-10"  label="装门窗" width="80" height="25" click="ShowScale()" skinClass="zszh_WorkSpace2D.Skin_PopupMenuBt"/>
+	
+	<s:Button id="myButton5" x="-40"  y="30"  label="属性" width="80" height="25" click="ShowScale()" skinClass="zszh_WorkSpace2D.Skin_PopupMenuBt"/>
+	
+</s:SkinnableContainer>

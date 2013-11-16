@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:NavigatorContent xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					xmlns:s="library://ns.adobe.com/flex/spark" 
+					xmlns:mx="library://ns.adobe.com/flex/mx" 
+				    width="313" height="700" xmlns:ns="zszh_Products_new.*" xmlns:zszhmodelsservice="services.zszhmodelsservice.*" xmlns:zszhjiancaiservice="services.zszhjiancaiservice.*">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<s:ArrayCollection id="ComboxData">
+			<fx:String>品牌</fx:String>
+			<fx:String>品牌</fx:String>
+			<fx:String>品牌</fx:String>
+			<fx:String>品牌</fx:String>
+		</s:ArrayCollection>
+		
+		<s:ArrayCollection id="product11">
+			
+			<fx:Object labelText="大房间" 	 imgThumbnail="{imageRoomBig}"    className="Room_2D" classArgument="1" resourcePath=""/>
+			<fx:Object labelText="小房间"  imgThumbnail="{imageRoomSmall}"  className="Room_2D" classArgument="4" resourcePath=""/>
+			<fx:Object labelText="L型房间" imgThumbnail="{imageRoomL}"      className="Room_2D" classArgument="2" resourcePath=""/>
+			<fx:Object labelText="横墙"   imgThumbnail="{imageRoomHeng}"    className="Wall_2D" classArgument="1" resourcePath=""/>
+			<fx:Object labelText="竖墙"   imgThumbnail="{imageRoomShu}"     className="Wall_2D" classArgument="2" resourcePath=""/>
+			
+
+			
+		</s:ArrayCollection>
+		
+		
+		<s:ArrayCollection id="product12">
+			
+			<fx:Object labelText="灶台" imgThumbnail="preview.png" className="door" resourcePath="zszh_res/models/doors/door00001/" objectName="door00001"/>
+			
+			<fx:Object labelText="沙发1" imgThumbnail="preview.png" className="door" resourcePath="zszh_res/models/doors/door00002/" objectName="door00002"/>
+			
+			<fx:Object labelText="沙发1" imgThumbnail="preview.jpg" className="door" resourcePath="zszh_res/models/doors/door00003/" objectName="door00003"/>
+			
+			
+		</s:ArrayCollection>
+		
+		<s:ArrayCollection id="product13">
+			
+			<fx:Object labelText="灶台" imgThumbnail="preview.png" className="window" resourcePath="zszh_res/models/windows/window00001/" objectName="window00001"/>
+			
+			<fx:Object labelText="沙发1" imgThumbnail="preview.png" className="window" resourcePath="zszh_res/models/windows/window00002/" objectName="window00002"/>
+			
+			<fx:Object labelText="沙发1" imgThumbnail="preview.jpg" className="window" resourcePath="zszh_res/models/windows/window00003/" objectName="window00003"/>
+			
+		</s:ArrayCollection>
+		
+		<s:ArrayCollection id="product14">
+			
+			
+			<fx:Object labelText="灶台"  imgThumbnail="preview.png" className="model" resourcePath="zszh_res/models/test/test00001/" objectName="bed00001"/>
+						
+			<fx:Object labelText="沙发1" imgThumbnail="preview.jpg" className="model" resourcePath="zszh_res/models/test/test00002/" objectName="test00002"/>
+			
+			<fx:Object labelText="沙发2" imgThumbnail="preview.jpg" className="model" resourcePath="zszh_res/models/test/test00003/" objectName="test00003"/>
+			
+			<fx:Object labelText="沙发3" imgThumbnail="preview.jpg" className="model" resourcePath="zszh_res/models/test/test00004/" objectName="test00004"/>
+			
+			<fx:Object labelText="沙发3" imgThumbnail="preview.jpg" className="model" resourcePath="zszh_res/models/test/test00005/" objectName="test00005"/>
+			
+			<fx:Object labelText="沙发3" imgThumbnail="preview.jpg" className="model" resourcePath="zszh_res/models/test/test00006/" objectName="test00006"/>
+			
+			<fx:Object labelText="沙发3" imgThumbnail="preview.jpg" className="model" resourcePath="zszh_res/models/test/test00007/" objectName="test00007"/>
+			
+			<fx:Object labelText="沙发3" imgThumbnail="preview.jpg" className="model" resourcePath="zszh_res/models/test/test00008/" objectName="test00008"/>
+			
+			<fx:Object labelText="沙发3" imgThumbnail="preview.jpg" className="model" resourcePath="zszh_res/models/test/test00009/" objectName="test00009"/>
+			
+			<fx:Object labelText="沙发3" imgThumbnail="preview.jpg" className="model" resourcePath="zszh_res/models/test/test00010/" objectName="test00010"/>
+			
+			
+		</s:ArrayCollection>
+		
+		
+		<s:ArrayCollection id="product15">
+			
+			
+			<fx:Object labelText="灶台"  imgThumbnail="preview.jpg" className="model" resourcePath="zszh_res/models/test/test00011/" objectName="test00011"/>
+			
+			<fx:Object labelText="沙发1" imgThumbnail="preview.jpg" className="model" resourcePath="zszh_res/models/test/test00012/" objectName="test00012"/>
+			
+			<fx:Object labelText="沙发2" imgThumbnail="preview.jpg" className="model" resourcePath="zszh_res/models/test/test00013/" objectName="test00013"/>
+			
+			<fx:Object labelText="沙发3" imgThumbnail="preview.jpg" className="model" resourcePath="zszh_res/models/test/test00014/" objectName="test00014"/>
+			
+			<fx:Object labelText="沙发3" imgThumbnail="preview.jpg" className="model" resourcePath="zszh_res/models/test/test00015/" objectName="test00015"/>
+			
+			<fx:Object labelText="沙发3" imgThumbnail="preview.jpg" className="model" resourcePath="zszh_res/models/test/test00016/" objectName="test00016"/>
+			
+			<fx:Object labelText="沙发3" imgThumbnail="preview.jpg" className="model" resourcePath="zszh_res/models/test/test00017/" objectName="test00017"/>
+			
+			<fx:Object labelText="沙发3" imgThumbnail="preview.jpg" className="model" resourcePath="zszh_res/models/test/test00018/" objectName="test00018"/>
+			
+			<fx:Object labelText="沙发3" imgThumbnail="preview.png" className="modelOnWall" resourcePath="zszh_res/models/test/test00019/" objectName="test00019"/>
+			<fx:Object labelText="沙发3" imgThumbnail="preview.jpg" className="model" resourcePath="zszh_res/models/test/test00020/" objectName="test00020"/>
+			
+
+			
+			
+		</s:ArrayCollection>
+		
+		
+		<s:ArrayCollection id="product31">
+			
+			<fx:Object labelText="床00001" imgThumbnail="preview.png" className="model" resourcePath="zszh_res/models/beds/bed00001/" objectName="bed00001"/>
+			<fx:Object labelText="浴缸00001" imgThumbnail="preview.png" className="model" resourcePath="zszh_res/models/yugangs/yugang00001/" objectName="yugang00001"/>
+			<fx:Object labelText="椅子" imgThumbnail="preview.png" className="model" resourcePath="zszh_res/models/yi_zi_di/" objectName="yi_zi_di"/>
+			
+			<fx:Object labelText="灶台" imgThumbnail="preview.png" className="model" resourcePath="zszh_res/models/zao_tai_di/" objectName="zao_tai_di"/>
+			
+			<fx:Object labelText="沙发1" imgThumbnail="preview.png" className="model" resourcePath="zszh_res/models/sha_fa_01_di/" objectName="sha_fa_01_di"/>
+			
+			<fx:Object labelText="沙发2" imgThumbnail="preview.png" className="model" resourcePath="zszh_res/models/sha_fa_02_di/" objectName="sha_fa_02_di"/>
+			
+			<fx:Object labelText="沙发3" imgThumbnail="preview.png" className="model" resourcePath="zszh_res/models/sha_fa_03_di/" objectName="sha_fa_03_di"/>
+			
+		</s:ArrayCollection>
+		
+		<s:CallResponder id="testCallresponder"/>
+		<s:CallResponder id="testCallresponderCount"/>
+		<zszhjiancaiservice:ZszhjiancaiService id="getallTest2" result="getallTest2_resultHandler(event)" fault="Alert.show(event.fault.faultString+ '\n' + event.fault.faultDetail)" showBusyCursor="true"/>
+		<zszhjiancaiservice:ZszhjiancaiService  id="getallTest" result="getallTest_resultHandler(event)" fault="Alert.show(event.fault.faultString+ '\n' + event.fault.faultDetail)" showBusyCursor="true"/>
+		
+		
+		<s:CallResponder id="ModelCallResponder"/>
+		<zszhmodelsservice:ZszhmodelsService id="ModelService" result="ModelService_resultHandler(event)" fault="Alert.show(event.fault.faultString+ '\n' + event.fault.faultDetail)" showBusyCursor="true"/>
+	</fx:Declarations>
+	<fx:Style>
+		@namespace s "library://ns.adobe.com/flex/spark";
+		@namespace mx "library://ns.adobe.com/flex/mx";
+		.contentStyle{
+			backgroundColor: #ff0000;
+			skin: ClassReference("zszh_Products_old.Skin_NavigatorContent");
+		}
+		
+		
+	</fx:Style>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			import mx.rpc.CallResponder;
+			import mx.rpc.events.ResultEvent;
+			
+			import services.mysqlcon.Mysqlcon;
+			
+			[Bindable]
+			[Embed(source="../embeds/rooms/room_big.png")]
+			public var imageRoomBig:Class;
+			
+			[Bindable]
+			[Embed(source="../embeds/rooms/room_small.png")]
+			public var imageRoomSmall:Class;
+			
+			[Bindable]
+			[Embed(source="../embeds/rooms/room_L.png")]
+			public var imageRoomL:Class;
+			
+			[Bindable]
+			[Embed(source="../embeds/rooms/room_heng.png")]
+			public var imageRoomHeng:Class;
+			
+			[Bindable]
+			[Embed(source="../embeds/rooms/room_shu.png")]
+			public var imageRoomShu:Class;
+			
+			[Bindable]
+			[Embed(source="../embeds/rooms/room_banyuan.png")]
+			public var imageRoomBanyuan:Class;
+			
+			[Bindable]
+			[Embed(source="../embeds/rooms/room_banyuan2.png")]
+			public var imageRoomBanyuan2:Class;
+			
+			
+			private var productsArray:Array = 
+				[
+					
+					{label: "Andy Budd", url:"http://andybudd.com"},
+					{label: "Grant Skinner", url:"http://gskinner.com"},
+					{label: "Paul Booth", url:"http://paulbooth.com"}
+					
+				];
+			
+			[Bindable]
+			private var productsCol:ArrayCollection;
+			
+			/*private function creationCompleteHandler(event:FlexEvent):void
+				
+			{
+				bloggersCol = new ArrayCollection (bloggersArray);    
+			}*/
+			
+			private var currentPage:int=0;
+
+			protected function myList_initializeHandler(event:FlexEvent):void
+			{
+				productsCol=product11;				
+			}
+			
+			public function SetDataProvider(index:int):void
+			{
+				if(index==11)
+				{
+					productsCol=product11;
+					myList.setStyle("verticalScrollPolicy","off");
+				}
+				else if(index==12)
+					productsCol=product12;
+				else if(index==13)
+					productsCol=product13;
+				else if(index==14)
+					productsCol=product14;
+				else if(index==15)
+					productsCol=product15;
+				
+				else if (index==41)
+				{
+					testCallresponderCount.token=getallTest2.countByClassName("diban");
+					
+					testCallresponder.token=getallTest.getZszh_jiancaiByClassName("diban",currentPage,10);
+				}
+				else if (index==44)
+				{
+					testCallresponder.token=getallTest.getZszh_jiancaiByClassName("rujiaoqi",currentPage,10);
+					//getallTest.count()
+				} 
+				
+				else if (index==31)
+				{
+					ModelCallResponder.token=ModelService.getZszh_modelsByCategory("bed",0,10);
+					//productsCol=product31;
+				} 
+				else if (index==32)
+				{
+					ModelCallResponder.token=ModelService.getZszh_modelsByCategory("chest",0,10);
+					//productsCol=product31;
+				} 
+				else if (index==33)
+				{
+					ModelCallResponder.token=ModelService.getZszh_modelsByCategory("sofa",0,10);
+					//productsCol=product31;
+				} 
+				else if (index==34)
+				{
+					ModelCallResponder.token=ModelService.getZszh_modelsByCategory("table",0,10);
+					//productsCol=product31;
+				} 
+			}
+			
+			protected function getallTest_resultHandler(event:ResultEvent):void
+			{
+				// TODO Auto-generated method stub
+				productsCol=testCallresponder.lastResult;
+			}
+			protected function getallTest2_resultHandler(event:ResultEvent):void
+			{
+				// TODO Auto-generated method stub
+				var pagesTotal:int=testCallresponderCount.lastResult;
+				ProductsPage.SetPagesTotal(pagesTotal);
+				ProductsPage.visible=true;
+			}
+			
+			protected function OnPageDown(event:MouseEvent):void
+			{
+				if(ProductsPage.currentPage!=currentPage)
+				{
+					currentPage=ProductsPage.currentPage;
+					testCallresponder.token=getallTest.getZszh_jiancaiByClassName("diban",currentPage,10);
+				}
+			}
+			
+			protected function ModelService_resultHandler(event:ResultEvent):void
+			{
+				productsCol=ModelCallResponder.lastResult;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	
+	<s:SkinnableContainer id="Search" top="1" backgroundColor="#1abc9c" width="100%" height="75" >
+		<s:Label text="Search" x="10" verticalCenter="5" styleName="customFontStyles" />
+		<!--mx:TextInput x="85" width="160" height="32" verticalCenter="5" styleName="customTextInput" /-->
+		<s:ComboBox x="75" width="170" verticalCenter="5" styleName="customCombox" />
+		<s:Image  buttonMode="true" x="262" source="@Embed('embeds/MainMenu/icon_search.png')" verticalCenter="5"/>
+	</s:SkinnableContainer>
+
+	<s:SkinnableContainer id="ProductsShow" backgroundColor="#00cd99" y="75" width="100%" height="100%" > 
+		
+		<s:SkinnableContainer backgroundColor="#10181e" top="1" left="1" right="1" bottom="1">
+			<ns:ComboxCustom x="5" width="99" top="5" height="25"   skinClass="zszh_Products_new.ComboxSkin" dataProvider="{ComboxData}" selectedIndex="0" />
+			<s:ComboBox x="106" width="99" top="5" height="25" skinClass="zszh_Products_new.ComboxSkin"  dataProvider="{ComboxData}" selectedIndex="0" />
+			<s:ComboBox x="207" width="99" top="5" height="25"  dataProvider="{ComboxData}" selectedIndex="0"/>
+
+			<s:List id="myList" dragEnabled="false"  top="40"  contentBackgroundColor="#10181e" borderVisible="false" horizontalCenter="0" 
+				itemRenderer="zszh_Products_new.ItemRender_Products" initialize="myList_initializeHandler(event)" dataProvider="{productsCol}"
+				height="100%" verticalScrollPolicy="on">
+				<s:layout>
+				<s:TileLayout orientation="rows" requestedColumnCount="2" />
+				</s:layout>
+			
+
+			</s:List>
+			<ns:ProductsPage id="ProductsPage" bottom="20" horizontalCenter="0" visible="false" mouseDown="OnPageDown(event)"/>
+		</s:SkinnableContainer>
+		
+	</s:SkinnableContainer>
+	
+</s:NavigatorContent>

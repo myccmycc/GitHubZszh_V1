@@ -1,0 +1,413 @@
+
+<model xmlns="http://ns.adobe.com/Fiber/1.0">
+  <annotation name="ActionScriptGeneration">
+    <item name="FullyQualifyReferences">true</item>
+  </annotation>
+  <service name="ZszhjiancaiService">
+    <annotation name="ActionScriptGeneration">
+      <item name="Source">ZszhjiancaiService</item>
+      <item name="ServiceType">RemoteObject</item>
+      <item name="Package">services.zszhjiancaiservice</item>
+      <item name="Endpoint">gateway.php</item>
+      <item name="Destination">ZszhjiancaiService</item>
+    </annotation>
+    <annotation name="ServiceTypeGroup">
+      <item name="ServiceBackendType">PHP</item>
+    </annotation>
+    <annotation name="ServiceConfig">
+      <item name="PHP_RELATIVE_LOCATION">zszhApp_v2-debug/services/ZszhjiancaiService.php</item>
+      <item name="PHP_SERVER_ROOT">C:\xampp\htdocs</item>
+      <item name="DEFAULT_ENTITY_PACKAGE">valueObjects</item>
+      <item name="PHP_SERVICES_FOLDER">C:\xampp\htdocs\zszhApp_v2-debug\services</item>
+      <item name="PHP_LOCATION">C:/xampp/htdocs/zszhApp_v2-debug/services/ZszhjiancaiService.php</item>
+      <item name="LINKED_FILE">ZszhjiancaiService.php</item>
+      <item name="PHP_SERVER_ROOT_URL">http://localhost:8080/</item>
+      <item name="ABSOLUTE_ENDPOINT">http://localhost:8080/zszhApp_v2-debug/gateway.php</item>
+      <item name="PHP_CLASS_NAME">ZszhjiancaiService</item>
+    </annotation>
+    <function name="getAllZszh_jiancai" return-type="Zszh_jiancai[]">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="returnType">opaque</item>
+      </annotation>
+    </function>
+    <function name="getZszh_jiancaiByID" return-type="Zszh_jiancai">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">opaque</item>
+        <item name="returnType">opaque</item>
+      </annotation>
+      <parameter name="itemID" type="integer"/>
+    </function>
+    <function name="createZszh_jiancai" return-type="integer">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">opaque</item>
+        <item name="returnType">opaque</item>
+      </annotation>
+      <parameter name="item" type="Zszh_jiancai"/>
+    </function>
+    <function name="updateZszh_jiancai" return-type="void">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">opaque</item>
+        <item name="returnType">opaque</item>
+      </annotation>
+      <parameter name="item" type="Zszh_jiancai"/>
+    </function>
+    <function name="deleteZszh_jiancai" return-type="void">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">opaque</item>
+        <item name="returnType">opaque</item>
+      </annotation>
+      <parameter name="itemID" type="integer"/>
+    </function>
+    <function name="count" return-type="integer">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="returnType">opaque</item>
+      </annotation>
+    </function>
+    <function name="getZszh_jiancai_paged" return-type="Zszh_jiancai[]">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">opaque,opaque</item>
+        <item name="returnType">opaque</item>
+      </annotation>
+      <parameter name="startIndex" type="integer"/>
+      <parameter name="numItems" type="integer"/>
+    </function>
+    <function name="getZszh_jiancaiByClassName" return-type="opaque">
+      <annotation name="analyze group">
+        <item name="analyzed">false</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">opaque,opaque,opaque</item>
+        <item name="returnType">opaque</item>
+      </annotation>
+      <parameter name="itemClassName" type="opaque"/>
+      <parameter name="startIndex" type="opaque"/>
+      <parameter name="numItems" type="opaque"/>
+    </function>
+    <function name="countByClassName" return-type="opaque">
+      <annotation name="analyze group">
+        <item name="analyzed">false</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">opaque</item>
+        <item name="returnType">opaque</item>
+      </annotation>
+      <parameter name="itemClassName" type="opaque"/>
+    </function>
+  </service>
+  <entity name="Zszh_jiancai" persistent="true">
+    <annotation name="EntityProperties">
+      <item name="EntityOriginalName">Zszh_jiancai</item>
+    </annotation>
+    <annotation name="service Group">
+      <item name="service">ZszhjiancaiService,ZszhjiancaiServiceDummy</item>
+    </annotation>
+    <annotation name="ServerProperties">
+      <item name="IncludeRemoteClass">nonempty</item>
+    </annotation>
+    <annotation name="DataManagement">
+      <item name="create">createZszh_jiancai</item>
+      <item name="update">updateZszh_jiancai</item>
+      <item name="get">getZszh_jiancaiByID</item>
+      <item name="delete">deleteZszh_jiancai</item>
+      <item name="fillFunc">getAllZszh_jiancai,getZszh_jiancai_paged</item>
+      <item name="managingService">ZszhjiancaiService</item>
+    </annotation>
+    <annotation name="getZszh_jiancaiByID">
+      <item name="propertySpecifier">id,resourcePath,imgThumbnail,className,classArgument,objectName</item>
+    </annotation>
+    <annotation name="getAllZszh_jiancai">
+      <item name="propertySpecifier">id,resourcePath,imgThumbnail,className,classArgument,objectName</item>
+    </annotation>
+    <annotation name="getZszh_jiancai_paged">
+      <item name="propertySpecifier">id,resourcePath,imgThumbnail,className,classArgument,objectName</item>
+      <item name="pagingEnabled">true</item>
+      <item name="positionalPagingParameters">true</item>
+      <item name="countOperation">count</item>
+    </annotation>
+    <annotation name="ActionScriptGeneration">
+      <item name="Package">valueObjects</item>
+    </annotation>
+    <id name="id" type="integer"/>
+    <property name="resourcePath" type="string"/>
+    <property name="imgThumbnail" type="string"/>
+    <property name="className" type="string"/>
+    <property name="classArgument" type="string"/>
+    <property name="objectName" type="string"/>
+  </entity>
+  <service name="Mysqlcon">
+    <annotation name="ActionScriptGeneration">
+      <item name="Source">Mysqlcon</item>
+      <item name="ServiceType">RemoteObject</item>
+      <item name="Package">services.mysqlcon</item>
+      <item name="Endpoint">gateway.php</item>
+      <item name="Destination">Mysqlcon</item>
+    </annotation>
+    <annotation name="ServiceTypeGroup">
+      <item name="ServiceBackendType">PHP</item>
+    </annotation>
+    <annotation name="ServiceConfig">
+      <item name="PHP_RELATIVE_LOCATION">zszhApp_v2-debug/services/Mysqlcon.php</item>
+      <item name="PHP_SERVER_ROOT">C:\xampp\htdocs</item>
+      <item name="DEFAULT_ENTITY_PACKAGE">valueObjects</item>
+      <item name="PHP_SERVICES_FOLDER">C:\xampp\htdocs\zszhApp_v2-debug\services</item>
+      <item name="PHP_LOCATION">C:/xampp/htdocs/zszhApp_v2-debug/services/Mysqlcon.php</item>
+      <item name="LINKED_FILE">Mysqlcon.php</item>
+      <item name="PHP_SERVER_ROOT_URL">http://localhost:8080/</item>
+      <item name="ABSOLUTE_ENDPOINT">http://localhost:8080/zszhApp_v2-debug/gateway.php</item>
+      <item name="PHP_CLASS_NAME">Mysqlcon</item>
+    </annotation>
+    <function name="getAllCites_animal" return-type="opaque[]">
+      <annotation name="analyze group">
+        <item name="analyzed">false</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="returnType">opaque</item>
+      </annotation>
+    </function>
+    <function name="getCites_animalByID" return-type="opaque">
+      <annotation name="analyze group">
+        <item name="analyzed">false</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">opaque</item>
+        <item name="returnType">opaque</item>
+      </annotation>
+      <parameter name="itemID" type="opaque"/>
+    </function>
+    <function name="createCites_animal" return-type="opaque">
+      <annotation name="analyze group">
+        <item name="analyzed">false</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">opaque</item>
+        <item name="returnType">opaque</item>
+      </annotation>
+      <parameter name="item" type="opaque"/>
+    </function>
+    <function name="updateCites_animal" return-type="opaque">
+      <annotation name="analyze group">
+        <item name="analyzed">false</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">opaque</item>
+        <item name="returnType">opaque</item>
+      </annotation>
+      <parameter name="item" type="opaque"/>
+    </function>
+    <function name="deleteCites_animal" return-type="opaque">
+      <annotation name="analyze group">
+        <item name="analyzed">false</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">opaque</item>
+        <item name="returnType">opaque</item>
+      </annotation>
+      <parameter name="itemID" type="opaque"/>
+    </function>
+    <function name="count" return-type="opaque">
+      <annotation name="analyze group">
+        <item name="analyzed">false</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="returnType">opaque</item>
+      </annotation>
+    </function>
+    <function name="getCites_animal_paged" return-type="opaque[]">
+      <annotation name="analyze group">
+        <item name="analyzed">false</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">opaque,opaque</item>
+        <item name="returnType">opaque</item>
+      </annotation>
+      <parameter name="startIndex" type="opaque"/>
+      <parameter name="numItems" type="opaque"/>
+    </function>
+  </service>
+  <service name="ZszhmodelsService">
+    <annotation name="ActionScriptGeneration">
+      <item name="Source">ZszhmodelsService</item>
+      <item name="ServiceType">RemoteObject</item>
+      <item name="Package">services.zszhmodelsservice</item>
+      <item name="Endpoint">gateway.php</item>
+      <item name="Destination">ZszhmodelsService</item>
+    </annotation>
+    <annotation name="ServiceTypeGroup">
+      <item name="ServiceBackendType">PHP</item>
+    </annotation>
+    <annotation name="ServiceConfig">
+      <item name="PHP_RELATIVE_LOCATION">zszhApp_v2-debug/services/ZszhmodelsService.php</item>
+      <item name="PHP_SERVER_ROOT">C:\xampp\htdocs</item>
+      <item name="DEFAULT_ENTITY_PACKAGE">valueObjects</item>
+      <item name="PHP_SERVICES_FOLDER">C:\xampp\htdocs\zszhApp_v2-debug\services</item>
+      <item name="PHP_LOCATION">C:/xampp/htdocs/zszhApp_v2-debug/services/ZszhmodelsService.php</item>
+      <item name="LINKED_FILE">ZszhmodelsService.php</item>
+      <item name="PHP_SERVER_ROOT_URL">http://localhost:8080/</item>
+      <item name="ABSOLUTE_ENDPOINT">http://localhost:8080/zszhApp_v2-debug/gateway.php</item>
+      <item name="PHP_CLASS_NAME">ZszhmodelsService</item>
+    </annotation>
+    <function name="getAllZszh_models" return-type="Zszh_models[]">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="returnType">opaque</item>
+      </annotation>
+    </function>
+    <function name="getZszh_modelsByID" return-type="Zszh_models">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">opaque</item>
+        <item name="returnType">opaque</item>
+      </annotation>
+      <parameter name="itemID" type="integer"/>
+    </function>
+    <function name="createZszh_models" return-type="integer">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">opaque</item>
+        <item name="returnType">opaque</item>
+      </annotation>
+      <parameter name="item" type="Zszh_models"/>
+    </function>
+    <function name="updateZszh_models" return-type="void">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">opaque</item>
+        <item name="returnType">opaque</item>
+      </annotation>
+      <parameter name="item" type="Zszh_models"/>
+    </function>
+    <function name="deleteZszh_models" return-type="void">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">opaque</item>
+        <item name="returnType">opaque</item>
+      </annotation>
+      <parameter name="itemID" type="integer"/>
+    </function>
+    <function name="count" return-type="integer">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="returnType">opaque</item>
+      </annotation>
+    </function>
+    <function name="getZszh_models_paged" return-type="Zszh_models[]">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">opaque,opaque</item>
+        <item name="returnType">opaque</item>
+      </annotation>
+      <parameter name="startIndex" type="integer"/>
+      <parameter name="numItems" type="integer"/>
+    </function>
+    <function name="getZszh_modelsByCategory" return-type="opaque">
+      <annotation name="analyze group">
+        <item name="analyzed">false</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">opaque,opaque,opaque</item>
+        <item name="returnType">opaque</item>
+      </annotation>
+      <parameter name="itemCategory" type="opaque"/>
+      <parameter name="startIndex" type="opaque"/>
+      <parameter name="numItems" type="opaque"/>
+    </function>
+    <function name="countByCategory" return-type="opaque">
+      <annotation name="analyze group">
+        <item name="analyzed">false</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">opaque</item>
+        <item name="returnType">opaque</item>
+      </annotation>
+      <parameter name="itemCategory" type="opaque"/>
+    </function>
+    <function name="getZszh_jiancaiByClassName" return-type="opaque">
+      <annotation name="analyze group">
+        <item name="analyzed">false</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">opaque,opaque,opaque</item>
+        <item name="returnType">opaque</item>
+      </annotation>
+      <parameter name="itemClassName" type="opaque"/>
+      <parameter name="startIndex" type="opaque"/>
+      <parameter name="numItems" type="opaque"/>
+    </function>
+  </service>
+  <entity name="Zszh_models" persistent="true">
+    <annotation name="EntityProperties">
+      <item name="EntityOriginalName">Zszh_models</item>
+    </annotation>
+    <annotation name="service Group">
+      <item name="service">ZszhmodelsService,ZszhmodelsServiceDummy</item>
+    </annotation>
+    <annotation name="ServerProperties">
+      <item name="IncludeRemoteClass">nonempty</item>
+    </annotation>
+    <annotation name="DataManagement">
+      <item name="create">createZszh_models</item>
+      <item name="update">updateZszh_models</item>
+      <item name="get">getZszh_modelsByID</item>
+      <item name="delete">deleteZszh_models</item>
+      <item name="fillFunc">getAllZszh_models,getZszh_models_paged</item>
+      <item name="managingService">ZszhmodelsService</item>
+    </annotation>
+    <annotation name="getZszh_modelsByID">
+      <item name="propertySpecifier">id,className,objectName,resourcePath,category,property,imgThumbnail</item>
+    </annotation>
+    <annotation name="getAllZszh_models">
+      <item name="propertySpecifier">id,className,objectName,resourcePath,category,property,imgThumbnail</item>
+    </annotation>
+    <annotation name="getZszh_models_paged">
+      <item name="propertySpecifier">id,className,objectName,resourcePath,category,property,imgThumbnail</item>
+      <item name="pagingEnabled">true</item>
+      <item name="positionalPagingParameters">true</item>
+      <item name="countOperation">count</item>
+    </annotation>
+    <annotation name="ActionScriptGeneration">
+      <item name="Package">valueObjects</item>
+    </annotation>
+    <id name="id" type="integer"/>
+    <property name="className" type="string"/>
+    <property name="objectName" type="string"/>
+    <property name="resourcePath" type="string"/>
+    <property name="category" type="string"/>
+    <property name="property" type="string"/>
+    <property name="imgThumbnail" type="string"/>
+  </entity>
+</model>

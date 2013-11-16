@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					  xmlns:s="library://ns.adobe.com/flex/spark" 
+					  xmlns:mx="library://ns.adobe.com/flex/mx" width="775" height="510">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	 
+	<fx:Style>
+		
+		.WelcomeTabs {
+			
+			tabWidth:165;
+			tabHeight:33;
+			fontFamily:微软雅黑;
+			
+			paddingTop:0;
+			
+			paddingLeft:0;
+			
+			horizontalGap:3;
+			
+			fontSize:16;
+			
+			text-color:#34495e;
+			
+			text-roll-over-color:#ffffff;
+				
+			fontWeight:normal;
+			
+			up-skin:ClassReference("zszh_welcome.Skin_WelcomeTab");
+			
+			down-skin:ClassReference("zszh_welcome.Skin_WelcomeTab");
+			
+			over-skin:ClassReference("zszh_welcome.Skin_WelcomeTab");
+			
+			disabled-skin:ClassReference("zszh_welcome.Skin_WelcomeTab");
+			
+			selected-up-skin:ClassReference("zszh_welcome.Skin_WelcomeTabSelected");
+			
+			selected-down-skin:ClassReference("zszh_welcome.Skin_WelcomeTabSelected");
+			
+			selected-over-skin:ClassReference("zszh_welcome.Skin_WelcomeTabSelected");
+			
+			selected-disabled-skin:ClassReference("zszh_welcome.Skin_WelcomeTabSelected");
+			
+			
+		}
+		
+		.selectedTab {  
+			font-size:11;  
+			font-weight:normal;  
+			color:#00ff00;  
+		}  
+	</fx:Style>
+	
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			import mx.graphics.ImageSnapshot;
+			import mx.managers.PopUpManager;
+			
+			import zszh_WorkSpace2D.WorkSpace2D;
+			import zszh_WorkSpace2D.WorkSpace2DContainer;
+			import mx.controls.Alert;
+			
+			import zszh_WorkSpace3D.WorkSpace3D;
+			
+			private var _work2D:WorkSpace2D;
+			private var _work3D:WorkSpace3D;
+			
+			protected function ImageInitializeHandler(event:FlexEvent):void
+			{
+				GetSnapshot();
+			}
+			
+			private function OnSave():void{
+				//保存到服务器
+				_work2D=parentApplication.GetWorkSpace2D();
+				var fileName:String=GetSaveFileName();
+				if(fileName=="")
+					Alert.show("请输入设计名称.");
+				_work2D.SaveToXML(fileName);
+				OnCancel();
+			}
+			private function OnCancel():void {
+				PopUpManager.removePopUp(this);
+			}
+		
+
+			private function GetSnapshot():void
+			{				
+				var _work2D:WorkSpace2D=parentApplication.GetWorkSpace2D();
+				_work2D.GetBounds();
+				
+				_work2D.GetGrid().clearGird();
+				var bitmapData:BitmapData=ImageSnapshot.captureBitmapData(_work2D.GetGrid());
+				_work2D.GetGrid().drawGird();
+				var w:int=(_work2D._xMax-_work2D._xMin)*bitmapData.width/6400+100;
+				var h:int=(_work2D._yMax-_work2D._yMin)*bitmapData.width/6400+100;
+				var rect:Rectangle = new Rectangle(_work2D._xMin*bitmapData.width/6400-50,_work2D._yMin*bitmapData.width/6400-50,w,h);    
+				var bytearray:ByteArray = new ByteArray();
+				bytearray = bitmapData.getPixels(rect); //截取出所选区域的像素集合
+				
+				
+				var imgBD:BitmapData = new BitmapData(w,h);
+				bytearray.position=0;
+				var fillrect:Rectangle = new Rectangle(0,0,w,h);
+				imgBD.setPixels(fillrect,bytearray);
+				
+				var bitmap:Bitmap=new Bitmap(imgBD);
+				HouseStylePic.source=bitmap;
+			}
+			
+			private function GetSaveFileName():String
+			{
+				//username+fileid
+				var fileName:String=PaperName.text;
+				fileName+=".xml"
+				return fileName;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	
+	<mx:TabNavigator width="100%" height="100%" tabStyleName="WelcomeTabs" backgroundColor="0x2980d7" >
+		
+		<s:NavigatorContent label="保存" width="100%" height="100%" backgroundColor="0xffffff" >
+			
+			<s:Button label="Save" skinClass="zszh_welcome.Skin_BtStart" width="178" height="62" horizontalCenter="-150" bottom="15" click="OnSave()" />
+			<s:Button label="Cancel" skinClass="zszh_welcome.Skin_BtStart" width="178" height="62" horizontalCenter="150" bottom="15" click="OnCancel()" />
+			
+			<s:SkinnableContainer  width="100%" height="290" bottom="100" skinClass="zszh_welcome.Skin_WelcomeCenter" >
+					
+					<s:Image id="HouseStylePic" x="110" y="50" width="160" height="145" backgroundColor="0xb3b3b3" initialize="ImageInitializeHandler(event)" />
+					<s:Label id="CreateDate" text="2013/4/23" x="205" y="205" color="0x595959"  />
+					
+					<s:Label  text="设计名称" x="320" y="55" />
+					<s:TextInput  id="PaperName" x="400" y="50" width="280" text="键入设计名称" color="0x595959"/>
+					
+					<s:Label text="小区信息" x="320" y="105" />
+					<s:TextInput  x="400" y="100" width="280" text="键入小区信息" color="0x595959"/>
+					
+					<s:ComboBox labelField="省份"  x="400" y="150"  width="90" color="0x595959"/>
+					<s:ComboBox labelField="城市" x="495" y="150" width="90" color="0x595959"/>
+					<s:ComboBox labelField="区县" x="590" y="150" width="90" color="0x595959"/>
+					<s:ComboBox labelField="格局"  x="400" y="200" width="250" color="0x595959"/>
+					
+			</s:SkinnableContainer>
+		</s:NavigatorContent>
+		
+	</mx:TabNavigator>
+	
+</s:SkinnableContainer>

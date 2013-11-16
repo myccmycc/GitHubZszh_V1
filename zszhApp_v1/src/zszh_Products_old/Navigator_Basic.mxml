@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:NavigatorContent xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					xmlns:s="library://ns.adobe.com/flex/spark" 
+					xmlns:mx="library://ns.adobe.com/flex/mx" width="400" height="300" xmlns:ns="zszh_Products_old.*" >
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+		<fx:Style>
+			
+		.myTabs {
+			
+			tabWidth:77;
+			tabHeight:30;
+			fontFamily:宋体;
+			
+			paddingTop:0;
+			
+			paddingLeft:0;
+			
+			horizontalGap:3;
+
+			fontSize:14;
+			
+			fontWeight:bold;
+			
+			
+			up-Skin:ClassReference("zszh_Products_old.Skin_TabNavigator");
+			
+			down-skin:ClassReference("zszh_Products_old.Skin_TabNavigator");
+			
+			over-skin:ClassReference("zszh_Products_old.Skin_TabNavigator");
+			
+			disabled-skin:ClassReference("zszh_Products_old.Skin_TabNavigator");
+			
+			selected-up-skin:ClassReference("zszh_Products_old.Skin_TabNavigator");
+			
+			selected-down-skin:ClassReference("zszh_Products_old.Skin_TabNavigator");
+			
+			selected-over-skin:ClassReference("zszh_Products_old.Skin_TabNavigator");
+			
+			selected-disabled-skin:ClassReference("zszh_Products_old.Skin_TabNavigator");
+			
+		}
+	</fx:Style>
+ 	<mx:TabNavigator width="100%" height="100%" styleName="myTabs" >
+		<ns:Navigator_BasicWall label="墙"  width="100%" height="100%" />
+		<ns:Navigator_BasicWall label="门"  width="100%" height="100%" />
+		<ns:Navigator_BasicWall label="窗"  width="100%" height="100%" />
+		<ns:Navigator_BasicWall label="梯"  width="100%" height="100%" />
+	</mx:TabNavigator>
+	
+</s:NavigatorContent>

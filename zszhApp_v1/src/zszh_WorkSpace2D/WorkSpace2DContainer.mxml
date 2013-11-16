@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					  xmlns:s="library://ns.adobe.com/flex/spark" 
+					  xmlns:mx="library://ns.adobe.com/flex/mx" width="400" height="300" xmlns:local="*" xmlns:ns="zszh_WorkSpace2D.*"
+					  enterFrame="OnEnterFrame(event)" resize="OnResize(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.ResizeEvent;
+			import mx.messaging.AbstractConsumer;
+			
+			import spark.components.Label;
+			
+			[Bindable]
+			[Embed(source="../embeds/ToolsBar/scale_icon.png")]
+			private var _scaleIcon:Class;
+			
+			
+			protected function OnEnterFrame(event:Event):void
+			{
+				if(scaleShow&&WorkSpace2D&&WorkSpace2D.GetGrid())
+				{
+					//scaleBt.label=WorkSpace2D.GetGrid().scaleX.toString();
+					
+					if(scaleShow._scale!=WorkSpace2D.GetGrid().scaleX || _bResize)
+					{
+						scaleShow.SetScale(WorkSpace2D.GetGrid().scaleX);
+						
+					 
+						var pos:int=WorkSpace2D.GetGrid().scaleX*100-10;
+						
+						parentApplication.ToolsBar.SetScalePostion(pos);
+						
+						DrawTextScale();
+						_bResize=false;
+					}
+				}
+			}
+			
+			private var _bResize:Boolean=false;
+			protected function OnResize(event:ResizeEvent):void
+			{
+				_bResize=true;
+			}
+			
+			
+			private function DrawTextScale():void
+			{
+				labelContainer.removeAllElements();
+
+				scaleShow._totalMeter=4/scaleShow._scale;
+				
+				for(var i:int=0;i<scaleShow._totalMeter;i+=2)
+				{
+					var label:spark.components.Label=new spark.components.Label;
+					label.text=((i+1)*2).toString();
+					label.text+="m";
+					label.setStyle( "textAlign", "center" );
+					label.setStyle( "color", "0xffffff" );
+					label.x=scaleShow.x+scaleShow._scaleWidth*(i+1)/scaleShow._totalMeter;
+					label.y=scaleShow.y-10;
+					labelContainer.addElement(label);
+				 
+				}
+			}
+			
+			static public var _gBShowScale:Boolean=false;
+			
+			public function ShowTextScale(event:MouseEvent):void
+			{
+				if(_gBShowScale)
+					_gBShowScale=false;
+				else _gBShowScale =true;
+						 
+				WorkSpace2D.SetAllNoSelected();
+				
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<ns:WorkSpace2D id="WorkSpace2D" width="100%" height="100%"/>
+	<!--s:Button id="scaleBt" width="100" height="20" bottom="20"/-->
+	<s:Image  id="scaleIcon" source="{_scaleIcon}" bottom="5" x="{scaleShow.x-70}" buttonMode="true" click="ShowTextScale(event)"/>
+	<s:SkinnableContainer id="labelContainer"/>
+	<ns:WorkSpace2D_Scale id="scaleShow" bottom="20" x="450"/>
+	
+</s:SkinnableContainer>

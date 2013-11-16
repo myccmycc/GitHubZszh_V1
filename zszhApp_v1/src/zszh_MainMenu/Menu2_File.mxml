@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					  xmlns:s="library://ns.adobe.com/flex/spark" 
+					  xmlns:mx="library://ns.adobe.com/flex/mx" width="170" height="100%" 
+					  addedToStage="skinnablecontainer1_addedToStageHandler(event)" rollOver="skinnablecontainer1_mouseOverHandler(event)" 
+					  rollOut="skinnablecontainer1_mouseOutHandler(event)">
+	
+	<fx:Script>
+		<![CDATA[
+			import flash.utils.Timer;
+			
+			import mx.events.FlexEvent;
+			import mx.events.ResizeEvent;
+			import mx.managers.PopUpManager;
+			
+			import zszh_welcome.PopWin_MyDoc;
+			import zszh_welcome.PopWin_Save;
+			import zszh_welcome.PopWin_Welcome;
+			
+			[Bindable]
+			[Embed(source="embeds/MainMenu/icon_menu21.png")]
+			public var icon_menu21:Class;
+			
+			[Bindable]
+			[Embed(source="embeds/MainMenu/icon_menu22.png")]
+			public var icon_menu22:Class;
+			
+			
+			public var _bMouseOver:Boolean=false;
+			private var _timer:Timer;
+			
+			protected function skinnablecontainer1_addedToStageHandler(event:Event):void
+			{
+				trace("skinnablecontainer1_addedToStageHandler");
+				_timer=new Timer(1000,10);
+				_timer.addEventListener(TimerEvent.TIMER,OnTimer);
+				_timer.start();
+			}
+			
+			private function OnTimer(e:TimerEvent):void
+			{
+				if(parentApplication._currentMenu!="MainMenu02"&&!_bMouseOver)
+				{
+					_bMouseOver=false;
+					_timer.stop();
+					PopUpManager.removePopUp(this);
+				}
+			}
+			protected function skinnablecontainer1_mouseOutHandler(event:MouseEvent):void
+			{
+				_bMouseOver=false;
+				_timer.stop();
+				PopUpManager.removePopUp(this);
+			}
+			
+			protected function skinnablecontainer1_mouseOverHandler(event:MouseEvent):void
+			{
+				_bMouseOver=true;
+			}
+			
+			protected function button_clickHandler(event:MouseEvent):void
+			{
+				if(event.target.id=="Button2")
+				{
+					//parentApplication.WorkSpace2D.WorkSpace2D.LoadFromXML("services/test.xml");
+					parentApplication.ShowPopWindow("PopWin_MyDoc");
+				}
+				else if(event.target.id=="Button3")
+				{
+					parentApplication.ShowPopWindow("PopWin_Save");
+				}
+				
+				_bMouseOver=false;
+				_timer.stop();
+				PopUpManager.removePopUp(this);
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:SkinnableContainer width="170" top="0" >
+		<s:Image bottom="0" horizontalCenter="0" source="@Embed('embeds/MainMenu/menu_bgTop.png')"/>
+	</s:SkinnableContainer>
+	
+	<s:SkinnableContainer  id="Logo2Container"  skinClass="zszh_MainMenu.Skin_Menu" top="17" width="170" height="100%">
+		<s:Group top="10" bottom="10" horizontalCenter="0">
+			<s:layout>
+				<s:VerticalLayout/>
+			</s:layout>
+			<s:Button id="Button1" label="新建文件" width="160" height="35" skinClass="zszh_MainMenu.Skin_MenuBt" icon="{icon_menu21}" mouseDown="button_clickHandler(event)"/>
+			<s:Button id="Button2" label="我的文档" width="160" height="35" skinClass="zszh_MainMenu.Skin_MenuBt" icon="{icon_menu22}" mouseDown="button_clickHandler(event)" />
+			<s:Button id="Button3" label="保存文件" width="160" height="35" skinClass="zszh_MainMenu.Skin_MenuBt" icon="{icon_menu21}" mouseDown="button_clickHandler(event)"/>
+			<s:Button id="Button4" label="户型搜索" width="160" height="35" skinClass="zszh_MainMenu.Skin_MenuBt" icon="{icon_menu21}" mouseDown="button_clickHandler(event)"/>
+			<s:Button id="Button5" label="置入房型" width="160" height="35" skinClass="zszh_MainMenu.Skin_MenuBt" icon="{icon_menu21}" mouseDown="button_clickHandler(event)"/>
+		</s:Group>
+	
+	</s:SkinnableContainer>
+
+</s:SkinnableContainer>

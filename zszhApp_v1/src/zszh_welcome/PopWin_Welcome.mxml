@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					  xmlns:s="library://ns.adobe.com/flex/spark" 
+					  xmlns:mx="library://ns.adobe.com/flex/mx" width="775" height="510">
+	<fx:Script>
+		<![CDATA[
+			import mx.managers.PopUpManager;
+			
+			[Embed(source="embeds/PopupWindow/B1.png")]
+			[Bindable] 
+			public var icon_B1:Class;
+			
+			[Embed(source="embeds/PopupWindow/B2.png")]
+			[Bindable] 
+			public var icon_B2:Class;
+			
+			[Embed(source="embeds/PopupWindow/B3.png")]
+			[Bindable] 
+			public var icon_B3:Class;
+			
+			
+			private function StartApp():void {
+				PopUpManager.removePopUp(this);
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	 
+	<fx:Style>
+		
+		.WelcomeTabs {
+			
+			tabWidth:165;
+			tabHeight:33;
+			fontFamily:微软雅黑;
+			
+			paddingTop:0;
+			
+			paddingLeft:0;
+			
+			horizontalGap:3;
+			
+			fontSize:16;
+			
+			text-color:#34495e;
+			
+			text-roll-over-color:#ffffff;
+				
+			fontWeight:normal;
+			
+			up-skin:ClassReference("zszh_welcome.Skin_WelcomeTab");
+			
+			down-skin:ClassReference("zszh_welcome.Skin_WelcomeTab");
+			
+			over-skin:ClassReference("zszh_welcome.Skin_WelcomeTab");
+			
+			disabled-skin:ClassReference("zszh_welcome.Skin_WelcomeTab");
+			
+			selected-up-skin:ClassReference("zszh_welcome.Skin_WelcomeTabSelected");
+			
+			selected-down-skin:ClassReference("zszh_welcome.Skin_WelcomeTabSelected");
+			
+			selected-over-skin:ClassReference("zszh_welcome.Skin_WelcomeTabSelected");
+			
+			selected-disabled-skin:ClassReference("zszh_welcome.Skin_WelcomeTabSelected");
+			
+			
+		}
+		
+		.selectedTab {  
+			font-size:11;  
+			font-weight:normal;  
+			color:#00ff00;  
+		}  
+	</fx:Style>
+	<mx:TabNavigator width="100%" height="100%" tabStyleName="WelcomeTabs" backgroundColor="0x2980d7" >
+		
+		<s:NavigatorContent label="Welcome" width="100%" height="100%" backgroundColor="0xffffff" >
+			<s:Button label="Start" skinClass="zszh_welcome.Skin_BtStart" width="215" height="75" horizontalCenter="0" bottom="15" click="StartApp()" />
+			<s:SkinnableContainer backgroundColor="0xf2f0ec" width="100%" height="192" bottom="120" >
+				<s:Button width="188" height="192"  x="45" icon="{icon_B1}"  skinClass="zszh_welcome.Skin_Bt"/>
+				<s:Button width="188" height="192"  x="300" icon="{icon_B2}" skinClass="zszh_welcome.Skin_Bt"/>
+				<s:Button width="188" height="192"  x="555" icon="{icon_B3}" skinClass="zszh_welcome.Skin_Bt"/>
+			</s:SkinnableContainer>
+		</s:NavigatorContent>
+		
+		<s:NavigatorContent label="模板欣赏" width="100%" height="100%" backgroundColor="0xffffff" >
+			<s:Button label="Start" skinClass="zszh_welcome.Skin_BtStart" width="215" height="75" horizontalCenter="0" bottom="15" click="StartApp()" />
+			
+			<s:SkinnableContainer width="100%" height="290" bottom="100" skinClass="zszh_welcome.Skin_WelcomeCenter" >
+				<s:Button width="188" height="192"  x="45" icon="{icon_B1}"  skinClass="zszh_welcome.Skin_Bt"/>
+				<s:Button width="188" height="192"  x="300" icon="{icon_B2}" skinClass="zszh_welcome.Skin_Bt"/>
+				<s:Button width="188" height="192"  x="555" icon="{icon_B3}" skinClass="zszh_welcome.Skin_Bt"/>
+			</s:SkinnableContainer>
+			
+		</s:NavigatorContent>
+		
+	</mx:TabNavigator>
+	
+</s:SkinnableContainer>

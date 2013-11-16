@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   xmlns:local="*"
+			   xmlns:ns="zszh_WorkSpace3D.*"
+			   xmlns:ns5="zszh_Products_old.*"
+			   xmlns:ns2="zszh_WorkSpace2D.*"
+			   xmlns:ns6="zszh_Products_new.*"
+			   xmlns:ns4="zszh_ToolsBar.*"
+			   minWidth="955" minHeight="600" addedEffect="{fadein}" backgroundAlpha="0"
+			   initialize="application1_initializeHandler(event)" preloader="zszh_Loading"
+			   resize="application_resizeHandler(event)">
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<s:Fade id="fadein" alphaFrom="0" alphaTo="1" duration="500"/>
+		<s:Fade id="fadeout" alphaFrom="1" alphaTo="0" duration="500"/>
+	</fx:Declarations>
+	
+	<fx:Style>
+		@namespace mx  "library://ns.adobe.com/flex/mx";
+		global {
+			modalTransparencyBlur: 2;/* 模糊度*/
+			modalTransparency: 0.6; /* 透明度*/
+			modalTransparencyDuration: 100;/* 过渡时间*/
+			modalTransparencyColor: black;
+		}
+		
+		mx|DragManager{
+			copy-cursor:Embed(source="../embeds/mouse01.png");
+			link-cursor:Embed(source="../embeds/mouse01.png");
+			move-cursor:Embed(source="../embeds/mouse01.png");
+			reject-cursor:Embed(source="../embeds/mouse01.png");
+		
+		}
+		.customAccordionHeadStyles {
+			skin: ClassReference("zszh_Products_old.Skin_AccordionHead");
+		}
+		
+		.customFontStyles{
+			font-size:14px;
+			font-style: normal;
+			font-weight: normal;	
+			fontFamily:微软雅黑;
+		}
+		.customTextInput{
+			font-size:16px;
+			font-style: normal;
+			font-weight: bold;
+			font-family:"Myriad Pro";
+			
+			corner-radius:10;
+			borderStyle: solid;
+			borderSkin: ClassReference("zszh_Products_old.Skin_TextInput");
+		}
+	</fx:Style>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			import mx.events.ResizeEvent;
+			import mx.managers.PopUpManager;
+			
+			import zszh_MainMenu.Menu2_File;
+			import zszh_MainMenu.Menu5_Help;
+			import zszh_MainMenu.Skin_MainMenuBt;
+			
+			import zszh_Products_new.ComboxInputSkin;
+			
+			import zszh_WorkSpace2D.WorkSpace2D;
+			
+			import zszh_WorkSpace3D.WorkSpace3D;
+			
+			import zszh_welcome.PopWin_MyDoc;
+			import zszh_welcome.PopWin_Save;
+			import zszh_welcome.PopWin_Welcome;
+			
+	
+			
+			//-------全局方法-------------
+			public function GetWorkSpace2D():WorkSpace2D
+			{
+				return _work2dContainer.WorkSpace2D;
+			}
+			
+			public function GetWorkSpace3D():WorkSpace3D
+			{
+				return _work3d;
+			}
+			
+			public function GetWorkSpace2DContainer():WorkSpace2DContainer
+			{
+				return _work2dContainer;
+			}
+			
+			
+			
+			
+			//-------------主菜单--end-------------------
+			
+			[Embed(source="../embeds/mouse01.png")]
+			public var imageCursor:Class;
+			
+
+			private var _menu2:Menu2_File=new Menu2_File;
+			private var _menu5:Menu5_Help=new Menu5_Help;
+			public var _currentMenu:String=null;
+			
+			protected function button1_mouseMoveHandler(event:MouseEvent):void
+			{
+				_currentMenu=event.target.id;
+				
+				if(event.target.id=="MainMenu01")
+				{
+					
+				}
+				else if(event.target.id=="MainMenu02")
+				{
+					PopUpManager.removePopUp(_menu2);
+					PopUpManager.addPopUp(_menu2,this,false);
+					
+					var pt:Point = new Point(0,0);  
+					pt = event.target.localToGlobal(pt);  
+					
+					var x1:int=pt.x+event.target.width/2 -_menu2.width/2;
+					var y1:int=pt.y+event.target.height-2;
+					_menu2.move(x1,y1);
+				}
+				else if(event.target.id=="MainMenu03")
+				{
+					
+				}
+				else if(event.target.id=="MainMenu04")
+				{
+					
+				}
+				else if(event.target.id=="MainMenu05")
+				{
+					PopUpManager.removePopUp(_menu5);
+					PopUpManager.addPopUp(_menu5,this,false);
+					
+					pt = new Point(0,0);  
+					pt = event.target.localToGlobal(pt);  
+					
+				 	x1=pt.x+event.target.width/2 -_menu5.width/2;
+				 	y1=pt.y+event.target.height-2;
+					_menu5.move(x1,y1);
+				}
+			
+			}
+			
+			protected function button1_mouseOutHandler(event:MouseEvent):void
+			{
+				_currentMenu=null;				
+			}
+		
+			
+			
+			//-------------PopWindows ---------
+			private var currentDoc:String=null;
+			
+			public function ShowPopWindow(window:String):void
+			{
+				if(window=="PopWin_MyDoc")//打开
+				{
+					//查询数据库
+					//发送给弹出对话框
+					
+					
+					var mydocWindow:PopWin_MyDoc=new PopWin_MyDoc();
+					PopUpManager.addPopUp(mydocWindow,this,true);
+					
+					var x1:int=(this.width-mydocWindow.width)/2;
+					var y1:int=(this.height-mydocWindow.height)/2;
+					mydocWindow.move(x1,y1);
+					
+				}
+				else if(window=="PopWin_Save")//保存
+				{
+					if(currentDoc)
+					{
+						//保存现有文件
+						GetWorkSpace2D().SaveToXML(currentDoc);
+					}
+					else 
+					{
+						var objectsNum:int=GetWorkSpace2D().GetObject2D().numChildren;
+						if(objectsNum==0)
+						{
+							Alert.show("请先设计设计内容！");
+							return;
+						}
+						var saveWindow:PopWin_Save=new PopWin_Save();
+						PopUpManager.addPopUp(saveWindow,this,true);
+					
+						x1=(this.width-saveWindow.width)/2;
+						y1=(this.height-saveWindow.height)/2;
+						saveWindow.move(x1,y1);
+					}
+					
+				}
+			}
+			
+			
+			
+			//-----------欢迎界面---------------------
+			private var welcomeWindow:PopWin_Welcome;
+			protected function application1_initializeHandler(event:FlexEvent):void
+			{		
+				welcomeWindow=new PopWin_Welcome();
+				PopUpManager.addPopUp(welcomeWindow,this,true);
+				
+				var x1:int=(this.width-welcomeWindow.width)/2;
+				var y1:int=(this.height-welcomeWindow.height)/2;
+				welcomeWindow.move(x1,y1);
+			}
+			
+			protected function application_resizeHandler(event:ResizeEvent):void
+			{
+				if(welcomeWindow)
+				{
+					var x1:int=(this.width-welcomeWindow.width)/2;
+					var y1:int=(this.height-welcomeWindow.height)/2;
+					welcomeWindow.move(x1,y1);
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<!--主菜单/-->
+	<s:SkinnableContainer depth="10"  backgroundColor="#ffffff" id="LogoContainer" height="59" width="100%">
+		<s:Group width="100%" height="100%" > 
+			<s:Rect width="100%" height="100%"> 
+				<s:fill> 
+					<s:BitmapFill source="@Embed('embeds/MainMenu/logo_back.jpg')" fillMode="repeat"/>   
+				</s:fill> 
+			</s:Rect> 
+		</s:Group> 
+		
+		<s:Image id="Logo" source="@Embed('embeds/MainMenu/logo.png')"/>
+		<s:SkinnableContainer id="MainMenu" verticalCenter="0" right="100" backgroundAlpha="0">
+		<s:Button buttonMode="true" id="MainMenu01" label="首页" x="0"   width="86" height="30" rollOver="button1_mouseMoveHandler(event)" rollOut="button1_mouseOutHandler(event)"  skinClass="zszh_MainMenu.Skin_MainMenuBt"  />
+		<s:Button buttonMode="true" id="MainMenu02" label="文件" x="100" width="86" height="30" rollOver="button1_mouseMoveHandler(event)" rollOut="button1_mouseOutHandler(event)"  skinClass="zszh_MainMenu.Skin_MainMenuBt"/>		
+		<s:Button buttonMode="true" id="MainMenu03" label="输出" x="200" width="86" height="30" rollOver="button1_mouseMoveHandler(event)" rollOut="button1_mouseOutHandler(event)"  skinClass="zszh_MainMenu.Skin_MainMenuBt"/>		
+		<s:Button buttonMode="true" id="MainMenu04" label="清单" x="300" width="86" height="30" rollOver="button1_mouseMoveHandler(event)" rollOut="button1_mouseOutHandler(event)"   skinClass="zszh_MainMenu.Skin_MainMenuBt"/>		
+		<s:Button buttonMode="true" id="MainMenu05" label="帮助" x="400" width="86" height="30" rollOver="button1_mouseMoveHandler(event)" rollOut="button1_mouseOutHandler(event)"   skinClass="zszh_MainMenu.Skin_MainMenuBt"/>
+		</s:SkinnableContainer>
+	</s:SkinnableContainer>
+	
+	
+	<s:SkinnableContainer id="WorkSpace" depth="9" y="59" width="100%" height="100%" backgroundColor="#000000"  backgroundAlpha="0" >	
+		<!--工作区/-->
+		<s:SkinnableContainer id="WorkSpaceContainer"   depth="7" x="0" width="100%" height="100%" backgroundColor="#000000"  backgroundAlpha="0">
+			
+			<!--s:ComboBox x="5" width="99" top="5" height="25"   skinClass="zszh_Products_new.ComboxSkin" /-->
+			
+			<!--s:TextInput id="textInput" x="30" top="50" skinClass="zszh_Products_new.ComboxInputSkin"/--> 
+			
+			<ns:WorkSpace3D id="_work3d" width="100%" height="100%" visible="false"/>
+			
+			<ns2:WorkSpace2DContainer  id="_work2dContainer" backgroundAlpha="0"  backgroundColor="0x2f3243" width="100%" height="100%" visible="true"/>
+			
+			<ns4:ToolsBar id="ToolsBar" top="1" horizontalCenter="0"/>
+			
+			<ns6:ProductsMainMenu id="ProductsMenuMain"  backgroundAlpha="0" top="0" height="100%"/>
+
+		</s:SkinnableContainer>
+		
+		
+		
+		<s:Group id="WorkspaceBack" width="100%" height="100%" showEffect="{fadein}" hideEffect="{fadeout}" > 
+			<s:Rect width="100%" height="100%"> 
+				<s:fill> 
+					<s:BitmapFill source="@Embed('embeds/app_back.jpg')" fillMode="repeat"/>   
+				</s:fill> 
+			</s:Rect> 
+		</s:Group> 
+		
+	</s:SkinnableContainer>
+	
+</s:Application>

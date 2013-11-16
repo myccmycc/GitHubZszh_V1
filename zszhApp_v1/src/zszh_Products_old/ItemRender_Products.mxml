@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				autoDrawBackground="true" click="itemrenderer1_clickHandler(event)" mouseDown="itemrenderer1_mouseDownHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.core.DragSource;
+			import mx.core.UIComponent;
+			import mx.events.ItemClickEvent;
+			import mx.managers.DragManager;
+			
+			import spark.components.Image;
+			protected function itemrenderer1_clickHandler(event:MouseEvent):void
+			{
+				var e:ItemClickEvent = new ItemClickEvent(ItemClickEvent.ITEM_CLICK, true);
+				e.item = data;
+				e.index = itemIndex;
+				dispatchEvent(e);
+			}
+			
+			protected function itemrenderer1_mouseDownHandler(event:MouseEvent):void
+			{
+				var dragInitiator:UIComponent=UIComponent(event.currentTarget);			
+				
+				
+				var ds:DragSource = new DragSource();
+				ds.addData(dragInitiator, "myRule");//传递的数据
+				ds.addData(data.className, "className");//传递的数据
+				ds.addData(data.resourcePath, "resourcePath");//传递的数据
+				ds.addData(data.objectName, "objectName");//传递的数据
+				
+				var dragProxy:Image=new Image();
+				dragProxy.width=60;
+				dragProxy.height=60;
+				dragProxy.source=event.currentTarget.img.source;
+				DragManager.doDrag(dragInitiator, ds,event,dragProxy);
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:SkinnableContainer backgroundColor="0x404040" >
+		<s:layout>
+			<s:VerticalLayout />
+		</s:layout>
+		<s:SkinnableContainer width="90" height="70" backgroundColor="0xff0000" >
+			<s:Image id="img" source="{data.imgSource}" width="60" height="60" backgroundColor="0x404040" verticalCenter="0" horizontalCenter="0" />
+		</s:SkinnableContainer>
+		<s:Label text="{data.labelText}" width="90" textAlign="center" />
+	</s:SkinnableContainer>
+	
+</s:ItemRenderer>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					  xmlns:s="library://ns.adobe.com/flex/spark" 
+					  xmlns:mx="library://ns.adobe.com/flex/mx" width="170" height="100%" 
+					  addedToStage="skinnablecontainer1_addedToStageHandler(event)" rollOver="skinnablecontainer1_mouseOverHandler(event)" 
+					  rollOut="skinnablecontainer1_mouseOutHandler(event)">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.managers.PopUpManager;
+			
+			public var _bMouseOver:Boolean=false;
+			private var _timer:Timer;
+			protected function skinnablecontainer1_addedToStageHandler(event:Event):void
+			{
+				_timer=new Timer(1000,10);
+				_timer.addEventListener(TimerEvent.TIMER,OnTimer);
+				_timer.start();
+			}
+			
+			private function OnTimer(e:TimerEvent):void
+			{
+				if(parentApplication._currentMenu!="MainMenu05"&&!_bMouseOver)
+				{
+					_bMouseOver=false;
+					PopUpManager.removePopUp(this);
+				}
+			}
+			protected function skinnablecontainer1_mouseOutHandler(event:MouseEvent):void
+			{
+				_bMouseOver=false;
+				PopUpManager.removePopUp(this);
+
+			}
+			
+			protected function skinnablecontainer1_mouseOverHandler(event:MouseEvent):void
+			{
+				_bMouseOver=true;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:SkinnableContainer width="170" top="0" >
+		<s:Image bottom="0" horizontalCenter="0" source="@Embed('embeds/MainMenu/menu_bgTop.png')"/>
+	</s:SkinnableContainer>
+	
+	<s:SkinnableContainer  id="Logo2Container"  skinClass="zszh_MainMenu.Skin_Menu" top="17" width="170" height="100%">
+		<s:Group top="10" bottom="10" horizontalCenter="0">
+			<s:layout>
+				<s:VerticalLayout/>
+			</s:layout>
+			<s:Button label="新手入门" width="160" height="35" skinClass="zszh_MainMenu.Skin_MenuBt" icon="@Embed('embeds/MainMenu/icon_menu51.png')" iconPlacement="left"/>
+			<s:Button label="视频教程" width="160" height="35" skinClass="zszh_MainMenu.Skin_MenuBt" icon="@Embed('embeds/MainMenu/icon_menu51.png')" />
+			<s:Button label="在线问答" width="160" height="35" skinClass="zszh_MainMenu.Skin_MenuBt" icon="@Embed('embeds/MainMenu/icon_menu51.png')" />
+			<s:Button label="意见反馈" width="160" height="35" skinClass="zszh_MainMenu.Skin_MenuBt" icon="@Embed('embeds/MainMenu/icon_menu51.png')" />
+			<s:Button label="产品计划" width="160" height="35" skinClass="zszh_MainMenu.Skin_MenuBt" icon="@Embed('embeds/MainMenu/icon_menu51.png')" />
+		</s:Group>
+	
+	</s:SkinnableContainer>
+
+</s:SkinnableContainer>
